@@ -1,5 +1,6 @@
 package net.iessochoa.carlosarroyogalan.ejercicio1
 
+import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 //Añadido para que importe el color
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import net.iessochoa.carlosarroyogalan.ejercicio1.ui.theme.Ejercicio1Theme
@@ -26,6 +28,11 @@ import net.iessochoa.carlosarroyogalan.ejercicio1.ui.theme.Ejercicio1Theme
 import androidx.compose.ui.unit.dp
 //Añadida la unidad de tamaño sp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +44,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background)
                 {
-                    GreetingText(
-                        message = "Feliz Cumpleaños Maria",
-                        from = "De Carlos",
-                        //Actualizamos el parametro del modificador
-                        modifier = Modifier.padding(8.dp))
+                    GreetingImage(
+                        message = stringResource(R.string.happy_birthday_text),
+                        from = stringResource(R.string.From)
+                    )
                 }
             }
         }
@@ -54,8 +60,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     Ejercicio1Theme {
-        GreetingText(message = "Feliz Cumpleaños Maria!", from = "De Carlos")
+        GreetingImage(
+            message = stringResource(R.string.happy_birthday_text),
+            from = stringResource(R.string.From)
+        )
     }
+
 }
 
 //Nueva función
@@ -81,7 +91,33 @@ fun GreetingText(message: String, from: String,modifier: Modifier = Modifier){
             //Agregamos el padding para que se vaya a la linea derecha
             modifier = Modifier
                 .padding(16.dp)
-                    .align(alignment = Alignment.End)
+                //Centrado Horizontalmente
+                .align(alignment = Alignment.CenterHorizontally)
+        )
+    }
+}
+
+//Funcion de componibilidad para la imagen de fondo
+@Composable
+fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
+    //Imagen de fondo llamada de drawable
+    val image = painterResource(R.drawable.androidparty)
+    Box(modifier){
+        //La imagen añadida
+        Image(
+            painter = image,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alpha = 0.5F
+
+        )
+        //Texto de bienvenida
+        GreetingText(
+            message = message,
+            from = from,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
         )
     }
 }
