@@ -30,6 +30,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Icon
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 
@@ -40,15 +51,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Ejercicio1Theme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background)
-                {
-                    GreetingImage(
-                        message = stringResource(R.string.happy_birthday_text),
-                        from = stringResource(R.string.From)
-                    )
-                }
+                MainScream()
             }
         }
     }
@@ -60,64 +63,120 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     Ejercicio1Theme {
-        GreetingImage(
-            message = stringResource(R.string.happy_birthday_text),
-            from = stringResource(R.string.From)
-        )
+        MainScream()
     }
 
 }
-
-//Nueva función
 @Composable
-fun GreetingText(message: String, from: String,modifier: Modifier = Modifier){
-    //Para centrar el saludo, usamos el vertical alignment y el modifier para especificar
-    Column(verticalArrangement = Arrangement.Center,
-            modifier = modifier) {
-        //Elemento Text para que pase el mensaje
-        Text(
-            text = message,
-            //Tamaño de la fuente
-            fontSize = 100.sp,
-            //Altura de linea
-            lineHeight = 116.sp,
-            //Centramos el texto con TextAlign
-            textAlign = TextAlign.Center
+fun MainScream() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(0.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center // Para que haya espacio entre los elementos
+    ) {
+        // Parte superior con foto, nombre, trabajo
+        superior(
+            nombre = "Ibai Llanos",
+            trabajo = "Streamer de calidad",
+            //Imagen de drawable
+            foto = painterResource(id = R.drawable.images)
         )
-        //Otro elemento text para que agregue el from
-        Text(
-            text = from,
-            fontSize = 36.sp,
-            //Agregamos el padding para que se vaya a la linea derecha
-            modifier = Modifier
-                .padding(16.dp)
-                //Centrado Horizontalmente
-                .align(alignment = Alignment.CenterHorizontally)
+
+        // Datos de contacto, telefono, social y email
+        inferior(
+            telefono = "666 666 666",
+            social = "Facebook",
+            email = "ibaillanos@gmail.com"
         )
     }
 }
 
-//Funcion de componibilidad para la imagen de fondo
+//Parte superior
 @Composable
-fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
-    //Imagen de fondo llamada de drawable
-    val image = painterResource(R.drawable.androidparty)
-    Box(modifier){
-        //La imagen añadida
+fun superior(
+    nombre: String,
+    trabajo: String,
+    foto: Painter) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(16.dp)
+    ) {
+        // Imagen circular
         Image(
-            painter = image,
+            painter = foto,
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            alpha = 0.5F
-
-        )
-        //Texto de bienvenida
-        GreetingText(
-            message = message,
-            from = from,
             modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp)
+                .size(150.dp)
+                .clip(CircleShape)
         )
+
+        // Nombre
+        Text(
+            text = nombre,
+            style = MaterialTheme.typography.bodyLarge,
+            color = Color.Black,
+            modifier = Modifier.padding(top = 8.dp)
+        )
+
+        // Trabajo
+        Text(
+            text = trabajo,
+            style = MaterialTheme.typography.bodySmall,
+            color = Color.Gray
+        )
+    }
+}
+
+@Composable
+fun inferior(
+    telefono: String,
+    social: String,
+    email: String) {
+    Column(
+        modifier = Modifier.padding(100.dp, 0.dp, 100.dp, 0.dp),
+        horizontalAlignment = Alignment.Start
+    ) {
+        // Teléfono
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            //Diferentes iconos con el texto
+            Icon(
+                //Vector de el telefono
+                imageVector = Icons.Default.Phone,
+                contentDescription = "teléfono",
+                modifier = Modifier.size(24.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(text = telefono, style = MaterialTheme.typography.bodySmall)
+        }
+
+        // Social
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                //Vector de redes
+                imageVector = Icons.Default.Share,
+                contentDescription = "social",
+                modifier = Modifier.size(24.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(text = social, style = MaterialTheme.typography.bodySmall)
+        }
+
+        // Email
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                //Vector de email
+                imageVector = Icons.Default.Email,
+                contentDescription = "email",
+                modifier = Modifier.size(24.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(text = email, style = MaterialTheme.typography.bodySmall)
+        }
     }
 }
