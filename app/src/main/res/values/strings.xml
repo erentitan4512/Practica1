@@ -15,4 +15,12 @@
     <string name="Ej4_3_a_layout_composable_that_places_its_children_in_a_horizontal_sequence">A layout composable that places its children in a horizontal sequence.\n</string>
     <string name="Ej4_3column_composable">Column composable</string>
     <string name="Ej4_3_a_layout_composable_that_places_its_children_in_a_vertical_sequence">A layout composable that places its children in a vertical sequence.\n</string>
+    <string name="nombre">Ibai Llanos</string>
+    <string name="Trabajo">Streamer de calidad</string>
+    <string name="telefono">666 666 666</string>
+    <string name="RedesSociales">Facebook</string>
+    <string name="email">ibaillanos@gmail.com</string>
+    <string name="contenido">teléfono</string>
+    <string name="contenido2">social</string>
+    <string name="cotenido3">email</string>
 </resources>

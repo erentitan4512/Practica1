@@ -78,17 +78,17 @@ fun MainScream() {
     ) {
         // Parte superior con foto, nombre, trabajo
         superior(
-            nombre = "Ibai Llanos",
-            trabajo = "Streamer de calidad",
+            nombre = stringResource(R.string.nombre),
+            trabajo = stringResource(R.string.Trabajo),
             //Imagen de drawable
             foto = painterResource(id = R.drawable.images)
         )
 
         // Datos de contacto, telefono, social y email
         inferior(
-            telefono = "666 666 666",
-            social = "Facebook",
-            email = "ibaillanos@gmail.com"
+            telefono = stringResource(R.string.telefono),
+            social = stringResource(R.string.RedesSociales),
+            email = stringResource(R.string.email)
         )
     }
 }
@@ -145,7 +145,7 @@ fun inferior(
             Icon(
                 //Vector de el telefono
                 imageVector = Icons.Default.Phone,
-                contentDescription = "teléfono",
+                contentDescription = stringResource(R.string.contenido),
                 modifier = Modifier.size(24.dp),
                 tint = MaterialTheme.colorScheme.primary
             )
@@ -158,7 +158,7 @@ fun inferior(
             Icon(
                 //Vector de redes
                 imageVector = Icons.Default.Share,
-                contentDescription = "social",
+                contentDescription = stringResource(R.string.contenido2),
                 modifier = Modifier.size(24.dp),
                 tint = MaterialTheme.colorScheme.primary
             )
@@ -171,7 +171,7 @@ fun inferior(
             Icon(
                 //Vector de email
                 imageVector = Icons.Default.Email,
-                contentDescription = "email",
+                contentDescription = stringResource(R.string.cotenido3),
                 modifier = Modifier.size(24.dp),
                 tint = MaterialTheme.colorScheme.primary
             )
